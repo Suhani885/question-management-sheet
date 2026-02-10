@@ -13,13 +13,22 @@ const difficultyStyle = {
 
 export default function Question({ question, topicId, subTopicId }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
   const { deleteQuestion, updateQuestion } = useSheetStore();
 
   const dragId = question._id || question.id;
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: dragId });
 
   const style = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.4 : 1 };
+
+  const isCompleted = question.completed || false;
+
+  const handleToggleComplete = () => {
+    if (!dragId) return;
+    updateQuestion(topicId, subTopicId, dragId, {
+      ...question,
+      completed: !isCompleted,
+    });
+  };
 
   const handleDelete = () => {
     if (window.confirm("Delete this question?")) {
@@ -45,7 +54,7 @@ export default function Question({ question, topicId, subTopicId }) {
             </div>
 
             <button
-              onClick={() => setIsCompleted(!isCompleted)}
+              onClick={handleToggleComplete}
               className={`shrink-0 w-4 h-4 rounded border flex items-center justify-center transition-all ${
                 isCompleted ? "bg-green-500 border-green-500" : "border-gray-300 hover:border-orange-400"
               }`}
@@ -118,6 +127,7 @@ export default function Question({ question, topicId, subTopicId }) {
           onSave={(updatedName) =>
             dragId
               ? updateQuestion(topicId, subTopicId, dragId, {
+                  ...question,
                   questionId: { ...question.questionId, name: updatedName },
                 })
               : null
