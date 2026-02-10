@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Pencil } from "lucide-react";
+import { X } from "lucide-react";
 
 export default function EditModal({ title, initialValue, onSave, onClose }) {
   const [value, setValue] = useState(initialValue);

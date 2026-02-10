@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { GripVertical, Edit2, Trash2, ExternalLink, Check } from "lucide-react";
+import { GripVertical, Edit2, Trash2, ExternalLink, Check, BookOpen, Link2 } from "lucide-react";
 import { useSheetStore } from "../store/sheetStore";
 import EditModal from "./EditModal";
 
@@ -80,13 +80,25 @@ export default function Question({ question, topicId, subTopicId }) {
 
           <div className="flex items-center gap-0.5 shrink-0">
             {question.questionId?.problemUrl && (
-              <a href={question.questionId.problemUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 text-gray-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors" title="Open Problem">
+              <a 
+                href={question.questionId.problemUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors" 
+                title="Open Problem"
+              >
                 <ExternalLink size={13} />
               </a>
             )}
             {question.resource && (
-              <a href={question.resource} target="_blank" rel="noopener noreferrer" className="p-1.5 text-gray-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors" title="View Resource">
-                <ExternalLink size={13} />
+              <a 
+                href={question.resource} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-1.5 text-gray-400 hover:text-purple-500 hover:bg-purple-50 rounded-lg transition-colors" 
+                title="View Resource"
+              >
+                <BookOpen size={13} />
               </a>
             )}
             <button onClick={() => setIsEditModalOpen(true)} className="p-1.5 text-gray-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors" title="Edit">

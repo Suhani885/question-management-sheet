@@ -28,7 +28,7 @@ export default function App() {
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { distance: 8 }, // Increased distance to prevent accidental drags
+      activationConstraint: { distance: 8 }, 
     })
   );
 
@@ -56,27 +56,20 @@ export default function App() {
     const { active, over } = event;
     
     setActiveId(null);
-    
-    // If dropped outside or in the same position, do nothing
     if (!over || active.id === over.id) return;
     
-    // Find the indices
     const oldIndex = topics.findIndex((topic) => topic.id === active.id);
     const newIndex = topics.findIndex((topic) => topic.id === over.id);
     
-    // Validate indices
     if (oldIndex === -1 || newIndex === -1) return;
     
-    // Reorder the topics
     const reorderedTopics = arrayMove(topics, oldIndex, newIndex);
-    
-    // Update order property
     const updatedTopics = reorderedTopics.map((topic, index) => ({
       ...topic,
       order: index,
     }));
     
-    // Update state and sync
+   
     setTopics(updatedTopics);
     syncTopics(updatedTopics);
   };

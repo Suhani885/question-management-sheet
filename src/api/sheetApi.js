@@ -1,14 +1,11 @@
 const BASE_URL = 'https://node.codolio.com/api/question-tracker/v1/sheet';
 
-// ─── GET ───────────────────────────────────────────────
 export const fetchSheetBySlug = async (slug = 'striver-sde-sheet') => {
   const response = await fetch(`${BASE_URL}/public/get-sheet-by-slug/${slug}`);
   if (!response.ok) throw new Error('Failed to fetch sheet');
   const data = await response.json();
   return data.data;
 };
-
-// ─── Mock CRUD (no database, in-memory simulation) ─────
 
 let mockTopics = [];
 

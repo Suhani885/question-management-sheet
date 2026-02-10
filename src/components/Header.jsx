@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, BookOpen } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export default function Header({ onAddTopic }) {
   const [scrolled, setScrolled] = useState(false);
